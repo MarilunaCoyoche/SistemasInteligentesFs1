@@ -1,74 +1,56 @@
 package Views;
-import java.awt.EventQueue;
-import javax.swing.JFrame;
-import javax.swing.JTextField;
-import javax.swing.JLabel;
+
+import java.awt.BorderLayout;
+import java.awt.FlowLayout;
+
 import javax.swing.JButton;
+import javax.swing.JDialog;
+import javax.swing.JPanel;
+import javax.swing.border.EmptyBorder;
 
-public class ViewIMC {
+public class ViewIMC extends JDialog {
 
-	private JFrame frmCalcularImc;
-	private JTextField txtPeso;
-	private JTextField txtAltura;
-	private JLabel lblNewLabel;
+	private static final long serialVersionUID = 1L;
+	private final JPanel contentPanel = new JPanel();
 
 	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					ViewIMC window = new ViewIMC();
-					window.frmCalcularImc.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+		try {
+			ViewIMC dialog = new ViewIMC();
+			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
+			dialog.setVisible(true);
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 
 	/**
-	 * Create the application.
+	 * Create the dialog.
 	 */
 	public ViewIMC() {
-		initialize();
+		setBounds(100, 100, 450, 300);
+		getContentPane().setLayout(new BorderLayout());
+		contentPanel.setLayout(new FlowLayout());
+		contentPanel.setBorder(new EmptyBorder(5, 5, 5, 5));
+		getContentPane().add(contentPanel, BorderLayout.CENTER);
+		{
+			JPanel buttonPane = new JPanel();
+			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
+			getContentPane().add(buttonPane, BorderLayout.SOUTH);
+			{
+				JButton okButton = new JButton("OK");
+				okButton.setActionCommand("OK");
+				buttonPane.add(okButton);
+				getRootPane().setDefaultButton(okButton);
+			}
+			{
+				JButton cancelButton = new JButton("Cancel");
+				cancelButton.setActionCommand("Cancel");
+				buttonPane.add(cancelButton);
+			}
+		}
 	}
 
-	/**
-	 * Initialize the contents of the frame.
-	 */
-	private void initialize() {
-		frmCalcularImc = new JFrame();
-		frmCalcularImc.setTitle("Calcular IMC");
-		frmCalcularImc.setBounds(100, 100, 450, 107);
-		frmCalcularImc.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frmCalcularImc.getContentPane().setLayout(null);
-		
-		txtPeso = new JTextField();
-		txtPeso.setBounds(62, 6, 95, 26);
-		frmCalcularImc.getContentPane().add(txtPeso);
-		txtPeso.setColumns(10);
-		
-		txtAltura = new JTextField();
-		txtAltura.setColumns(10);
-		txtAltura.setBounds(219, 6, 90, 26);
-		frmCalcularImc.getContentPane().add(txtAltura);
-		
-		JLabel lblPeso = new JLabel("Peso");
-		lblPeso.setBounds(14, 11, 36, 16);
-		frmCalcularImc.getContentPane().add(lblPeso);
-		
-		lblNewLabel = new JLabel("Altura");
-		lblNewLabel.setBounds(169, 11, 45, 16);
-		frmCalcularImc.getContentPane().add(lblNewLabel);
-		
-		JButton btnCalcularImc = new JButton("Calcular IMC");
-		btnCalcularImc.setBounds(321, 6, 117, 29);
-		frmCalcularImc.getContentPane().add(btnCalcularImc);
-		
-		JLabel lblResultadoImc = new JLabel("Resultado IMC : ");
-		lblResultadoImc.setBounds(14, 44, 292, 16);
-		frmCalcularImc.getContentPane().add(lblResultadoImc);
-	}
 }
