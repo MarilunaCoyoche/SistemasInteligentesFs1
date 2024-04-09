@@ -9,7 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
-import javax.swing.JComboBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ViewPhysicalActivity extends JDialog {
 
@@ -23,7 +24,7 @@ public class ViewPhysicalActivity extends JDialog {
 		try {
 			ViewPhysicalActivity dialog = new ViewPhysicalActivity();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
+			dialog.setVisible(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,15 +74,29 @@ public class ViewPhysicalActivity extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Retroceder");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				JButton btnRetroceder = new JButton("Retroceder");
+				btnRetroceder.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						ViewMedicalCondition view = new ViewMedicalCondition();
+						view.setVisible(true);
+						contentPanel.setVisible(false);
+					}
+				});
+				btnRetroceder.setActionCommand("OK");
+				buttonPane.add(btnRetroceder);
+				getRootPane().setDefaultButton(btnRetroceder);
 			}
 			{
-				JButton cancelButton = new JButton("Continuar");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				JButton btnContinuar = new JButton("Continuar");
+				btnContinuar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						ViewPreferences view = new ViewPreferences();
+						contentPanel.setVisible(false);
+						view.setVisible(true);
+					}
+				});
+				btnContinuar.setActionCommand("Cancel");
+				buttonPane.add(btnContinuar);
 			}
 		}
 	}

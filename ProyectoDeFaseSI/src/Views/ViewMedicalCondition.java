@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JCheckBox;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ViewMedicalCondition extends JDialog {
 
@@ -22,7 +24,7 @@ public class ViewMedicalCondition extends JDialog {
 		try {
 			ViewMedicalCondition dialog = new ViewMedicalCondition();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
+			dialog.setVisible(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -58,12 +60,26 @@ public class ViewMedicalCondition extends JDialog {
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
 				JButton okButton = new JButton("Retroceder");
+				okButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						ViewBodySatisfaction view = new ViewBodySatisfaction();
+						contentPanel.setVisible(false);
+						view.setVisible(true);
+					}
+				});
 				okButton.setActionCommand("OK");
 				buttonPane.add(okButton);
 				getRootPane().setDefaultButton(okButton);
 			}
 			{
 				JButton cancelButton = new JButton("Continuar");
+				cancelButton.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						contentPanel.setVisible(false);
+						ViewPhysicalActivity view = new ViewPhysicalActivity();
+						view.setVisible(true);
+					}
+				});
 				cancelButton.setActionCommand("Cancel");
 				buttonPane.add(cancelButton);
 			}

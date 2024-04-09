@@ -16,7 +16,7 @@ public class ViewMainMenu {
 			public void run() {
 				try {
 					ViewMainMenu window = new ViewMainMenu();
-					window.frame.setVisible(true);
+					window.frame.setVisible(false);
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -40,5 +40,9 @@ public class ViewMainMenu {
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		frame.getContentPane().setLayout(null);
 	}
+	
+	public JFrame getFrame() {
+        return frame;
+    }
 
 }

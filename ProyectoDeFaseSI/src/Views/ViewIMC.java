@@ -9,6 +9,8 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ViewIMC extends JDialog {
 
@@ -24,7 +26,7 @@ public class ViewIMC extends JDialog {
 		try {
 			ViewIMC dialog = new ViewIMC();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
+			dialog.setVisible(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -73,9 +75,16 @@ public class ViewIMC extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton cancelButton = new JButton("Continuar");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				JButton btnContinuar = new JButton("Continuar");
+				btnContinuar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						ViewBodySatisfaction view = new ViewBodySatisfaction();
+						contentPanel.setVisible(false);
+						view.setVisible(true);
+						
+					}
+				});
+				buttonPane.add(btnContinuar);
 			}
 		}
 	}

@@ -7,6 +7,8 @@ import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+import java.awt.event.ActionListener;
+import java.awt.event.ActionEvent;
 
 public class ViewPreferences extends JDialog {
 
@@ -20,7 +22,7 @@ public class ViewPreferences extends JDialog {
 		try {
 			ViewPreferences dialog = new ViewPreferences();
 			dialog.setDefaultCloseOperation(JDialog.DISPOSE_ON_CLOSE);
-			dialog.setVisible(true);
+			dialog.setVisible(false);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -40,15 +42,29 @@ public class ViewPreferences extends JDialog {
 			buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
 			getContentPane().add(buttonPane, BorderLayout.SOUTH);
 			{
-				JButton okButton = new JButton("Retroceder");
-				okButton.setActionCommand("OK");
-				buttonPane.add(okButton);
-				getRootPane().setDefaultButton(okButton);
+				JButton btnRetroceder = new JButton("Retroceder");
+				btnRetroceder.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						ViewPhysicalActivity view = new ViewPhysicalActivity();
+						contentPanel.setVisible(false);
+						view.setVisible(true);
+					}
+				});
+				btnRetroceder.setActionCommand("Retroceder");
+				buttonPane.add(btnRetroceder);
+				getRootPane().setDefaultButton(btnRetroceder);
 			}
 			{
-				JButton cancelButton = new JButton("Continuar");
-				cancelButton.setActionCommand("Cancel");
-				buttonPane.add(cancelButton);
+				JButton btnContinuar = new JButton("Continuar");
+				btnContinuar.addActionListener(new ActionListener() {
+					public void actionPerformed(ActionEvent e) {
+						ViewMainMenu view = new ViewMainMenu();
+						contentPanel.setVisible(false);
+						view.getFrame().setVisible(true);
+					}
+				});
+				btnContinuar.setActionCommand("Continuar");
+				buttonPane.add(btnContinuar);
 			}
 		}
 	}
