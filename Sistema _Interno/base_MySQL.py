@@ -18,7 +18,7 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS almuerzos (
                     ingredientes TEXT
                 )''')
 
-cursor.execute('''CREATE TABLE IF NOT EXISTS meriendas (
+cursor.execute('''CREATE TABLE IF NOT EXISTS refrigerios (
                     id INTEGER PRIMARY KEY,
                     nombre TEXT,
                     calorias INTEGER,
@@ -30,6 +30,15 @@ cursor.execute('''CREATE TABLE IF NOT EXISTS cenas (
                     nombre TEXT,
                     calorias INTEGER,
                     ingredientes TEXT
+                )''')
+
+cursor.execute('''CREATE TABLE IF NOT EXISTS aperitivos (
+                    id INTEGER PRIMARY KEY,
+                    nombre TEXT,
+                    calorias INTEGER,
+                    grasas_saturadas TEXT,
+                    sodio TEXT,
+                    otros TEXT
                 )''')
 
 conexion.commit()

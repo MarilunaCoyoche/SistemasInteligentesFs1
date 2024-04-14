@@ -79,7 +79,7 @@ meriendas_data = [
     ('Batido de plátano y leche de coco', 280, 'Plátano, leche de coco')
 ]
 
-cursor.executemany('INSERT INTO meriendas (nombre, calorias, ingredientes) VALUES (?, ?, ?)', meriendas_data)
+cursor.executemany('INSERT INTO refrigerios (nombre, calorias, ingredientes) VALUES (?, ?, ?)', meriendas_data)
 
 cenas_data = [
     ('Salmón al horno con espárragos', 400, 'Filete de salmón, espárragos, limón, aceite de oliva, sal, pimienta'),
@@ -113,6 +113,55 @@ cenas_data = [
 ]
 
 cursor.executemany('INSERT INTO cenas (nombre, calorias, ingredientes) VALUES (?, ?, ?)', cenas_data)
+
+# Datos de los aperitivos
+
+aperitivos = [
+    ('Papas fritas', 150, 'Alto contenido de grasas saturadas, Alto contenido de sodio', '', None),
+    ('Palitos de zanahoria', 50, 'Bajo contenido de grasas saturadas, Bajo contenido de sodio', '', None),
+    ('Galletas saladas', 100, 'Moderado contenido de grasas saturadas, Moderado contenido de sodio', '', None),
+    ('Nueces', 200, 'Alto contenido calórico, Contenido alto en grasas saludables', '', None),
+    ('Chips de maíz', 180, 'Moderado contenido de grasas saturadas, Alto en sodio', '', None),
+    ('Barritas de granola', 120, 'Bajo contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en fibra', None),
+    ('Aceitunas', 60, 'Bajo contenido de grasas saturadas, Moderado en sodio', 'Alto contenido de grasas saludables', None),
+    ('Almendras tostadas', 160, 'Moderado contenido de grasas saturadas, Bajo contenido de sodio', 'Alto contenido de grasas saludables', None),
+    ('Hummus con palitos de apio', 100, 'Bajo contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en proteínas', None),
+    ('Tortillas de maíz con salsa', 120, 'Bajo contenido de grasas saturadas, Moderado en sodio', '', None),
+    ('Cubos de queso', 90, 'Moderado contenido de grasas saturadas, Moderado en sodio', 'Rico en calcio', None),
+    ('Tostadas integrales con aguacate', 110, 'Bajo contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en grasas saludables', None),
+    ('Bolitas de melón', 50, 'Bajo contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en vitamina C', None),
+    ('Zanahorias baby con hummus', 70, 'Bajo contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en proteínas', None),
+    ('Pepinos con aderezo griego', 80, 'Bajo contenido de grasas saturadas, Bajo contenido de sodio', '', None),
+    ('Rodajas de manzana con mantequilla de almendras', 120, 'Bajo contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en grasas saludables', None),
+    ('Rodajas de pepino con queso cottage', 60, 'Bajo contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en proteínas', None),
+    ('Tiras de pimiento rojo con guacamole', 90, 'Bajo contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en grasas saludables', None),
+    ('Tostadas de trigo integral con salsa de tomate', 100, 'Bajo contenido de grasas saturadas, Moderado en sodio', '', None),
+    ('Rollitos de jamón con queso', 110, 'Moderado contenido de grasas saturadas, Moderado en sodio', 'Rico en proteínas', None),
+    ('Huevos duros', 70, 'Moderado contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en proteínas', None),
+    ('Tiras de jícama con limón y chile', 40, 'Bajo contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en vitamina C', None),
+    ('Tomates cherry con mozzarella', 100, 'Moderado contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en calcio', None),
+    ('Rollitos de salmón ahumado con queso crema', 120, 'Moderado contenido de grasas saturadas, Moderado en sodio', 'Rico en proteínas', None),
+    ('Gelatina sin azúcar', 20, 'Bajo contenido de grasas saturadas, Bajo contenido de sodio', 'Bajo en calorías', None),
+    ('Bolitas de sandía', 30, 'Bajo contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en vitamina C', None),
+    ('Pepinillos en vinagre', 10, 'Bajo contenido de grasas saturadas, Moderado en sodio', 'Bajo en calorías', None),
+    ('Tiras de zanahoria con salsa de yogur', 60, 'Bajo contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en proteínas', None),
+    ('Huevos rellenos', 80, 'Moderado contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en proteínas', None),
+    ('Tostadas de pan integral con queso crema y salmón', 150, 'Moderado contenido de grasas saturadas, Moderado en sodio', 'Rico en proteínas', None),
+    ('Brochetas de frutas', 70, 'Bajo contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en vitaminas', None),
+    ('Higos secos envueltos en jamón serrano', 90, 'Moderado contenido de grasas saturadas, Moderado en sodio', 'Rico en proteínas', None),
+    ('Rollitos de tortilla de trigo integral con pollo', 130, 'Moderado contenido de grasas saturadas, Moderado en sodio', 'Rico en proteínas', None),
+    ('Rollitos de pepino con salmón ahumado y queso crema', 110, 'Moderado contenido de grasas saturadas, Moderado en sodio', 'Rico en proteínas', None),
+    ('Rodajas de piña con jamón', 70, 'Bajo contenido de grasas saturadas, Moderado en sodio', 'Rico en proteínas', None),
+    ('Dátiles rellenos de queso de cabra', 100, 'Moderado contenido de grasas saturadas, Moderado en sodio', 'Rico en proteínas', None),
+    ('Almendras tostadas con especias', 150, 'Moderado contenido de grasas saturadas, Bajo contenido de sodio', 'Alto contenido en grasas saludables', None),
+    ('Tostadas de pan integral con aguacate y tomate', 120, 'Bajo contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en grasas saludables', None),
+    ('Bocaditos de mozzarella con tomate cherry', 90, 'Moderado contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en calcio', None),
+    ('Rollitos de calabacín con queso feta', 110, 'Moderado contenido de grasas saturadas, Bajo contenido de sodio', 'Rico en calcio', None)
+]
+
+
+cursor.executemany("INSERT INTO aperitivos (nombre, calorias, grasas_saturadas, sodio, otros) VALUES (?, ?, ?, ?, ?)", aperitivos)
+
 
 conexion.commit()
 
