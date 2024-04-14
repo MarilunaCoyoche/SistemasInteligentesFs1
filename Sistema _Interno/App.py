@@ -48,6 +48,23 @@ class Recetas:
             platillo = random.choice(platillos)
             receta.append(platillo)
             total_calorias_platillos += platillo[1]
+
+        # Si las calorías consumidas superan la ingesta calórica recomendada por día,
+        # se intenta ajustar eliminando un platillo de la receta
+            while total_calorias_platillos > self.ingesta_calorica + 200:
+                platillo_eliminado = receta.pop()
+                total_calorias_platillos -= platillo_eliminado[1]
+
+        # Si las calorías consumidas están por debajo de la ingesta calórica recomendada por día
+        # y aún hay espacio para más calorías, se agregan aperitivos
+            while total_calorias_platillos < self.ingesta_calorica - 200 and max_calorias > 0:
+                aperitivos = self.obtener_platillos(max_calorias)
+                if not aperitivos:
+                    break
+                aperitivo = random.choice(aperitivos)
+                receta.append(aperitivo)
+                total_calorias_platillos += aperitivo[1]
+
         return receta, total_calorias_platillos
 
 class Usuario:
@@ -166,3 +183,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
