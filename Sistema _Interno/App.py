@@ -38,34 +38,59 @@ class Recetas:
         return dieta
 
     def generar_receta(self):
-        receta = []
+        desayuno = []
+        almuerzo = []
+        refrigerio = []
+        cena = []
         total_calorias_platillos = 0
+
         for _ in range(self.num_comidas):
             max_calorias = self.ingesta_calorica - total_calorias_platillos
             platillos = self.obtener_platillos(max_calorias)
             if not platillos:
                 break
             platillo = random.choice(platillos)
-            receta.append(platillo)
+
+            # Determinar la categoría del platillo según la hora del día
+            if total_calorias_platillos < self.ingesta_calorica * 0.25:  # Desayuno
+                desayuno.append(platillo)
+            elif total_calorias_platillos < self.ingesta_calorica * 0.5:  # Almuerzo
+                almuerzo.append(platillo)
+            elif total_calorias_platillos < self.ingesta_calorica * 0.75:  # Refrigerio
+                refrigerio.append(platillo)
+            else:  # Cena
+                cena.append(platillo)
+
             total_calorias_platillos += platillo[1]
 
         # Si las calorías consumidas superan la ingesta calórica recomendada por día,
         # se intenta ajustar eliminando un platillo de la receta
             while total_calorias_platillos > self.ingesta_calorica + 200:
-                platillo_eliminado = receta.pop()
+                platillo_eliminado = desayuno.pop() if desayuno else almuerzo.pop() if almuerzo else refrigerio.pop() if refrigerio else cena.pop()
                 total_calorias_platillos -= platillo_eliminado[1]
 
-        # Si las calorías consumidas están por debajo de la ingesta calórica recomendada por día
-        # y aún hay espacio para más calorías, se agregan aperitivos
-            while total_calorias_platillos < self.ingesta_calorica - 200 and max_calorias > 0:
-                aperitivos = self.obtener_platillos(max_calorias)
-                if not aperitivos:
-                    break
-                aperitivo = random.choice(aperitivos)
-                receta.append(aperitivo)
-                total_calorias_platillos += aperitivo[1]
+    # Si las calorías consumidas están por debajo de la ingesta calórica recomendada por día
+    # y aún hay espacio para más calorías, se agregan aperitivos
+        while total_calorias_platillos < self.ingesta_calorica - 200:
+            aperitivos = self.obtener_platillos(max_calorias)
+            if not aperitivos:
+                break
+            aperitivo = random.choice(aperitivos)
 
-        return receta, total_calorias_platillos
+        # Agregar el aperitivo a la categoría adecuada según la hora del día
+            if total_calorias_platillos < self.ingesta_calorica * 0.25:  # Desayuno
+                desayuno.append(aperitivo)
+            elif total_calorias_platillos < self.ingesta_calorica * 0.5:  # Almuerzo
+                almuerzo.append(aperitivo)
+            elif total_calorias_platillos < self.ingesta_calorica * 0.75:  # Refrigerio
+                refrigerio.append(aperitivo)
+            else:  # Cena
+                cena.append(aperitivo)
+
+            total_calorias_platillos += aperitivo[1]
+
+        return {'Desayuno': desayuno, 'Almuerzo': almuerzo, 'Refrigerio': refrigerio, 'Cena': cena}, total_calorias_platillos
+
 
 class Usuario:
     def __init__(self, sexo, peso, altura, edad, nivel_actividad, objetivo, num_comidas, alimentos_no_preferidos, problemas_salud=None):
@@ -163,10 +188,14 @@ def main():
             print("\n¡Aquí está tu dieta saludable para la semana!")
             for dia, (receta_dia, total_calorias) in dieta.items():
                 print(f"\nDía {dia}:")
-                for i, (nombre_platillo, calorias_platillo) in enumerate(receta_dia, start=1):
-                    print(f"Comida {i}:")
-                    print(f"Platillo: {nombre_platillo} - Calorías: {calorias_platillo}")
-                print(f"Total de calorías para el día: {total_calorias}")
+                # Iterar sobre las categorías de comida y los platillos dentro de cada categoría
+                for categoria, platillos in receta_dia.items():
+                    print(f"\n{categoria}:")
+                    for i, (nombre_platillo, calorias_platillo) in enumerate(platillos, start=1):
+                        print(f"Comida {i}:")
+                        print(f"Platillo: {nombre_platillo} - Calorías: {calorias_platillo}")
+                    print(f"Total de calorías para el día: {total_calorias}")
+
 
             print(f"\nTu ingesta calórica recomendada es de aproximadamente {int(ingesta_calorica)} calorías por día.")
 
